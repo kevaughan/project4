@@ -1,0 +1,152 @@
+
+
+<html>
+
+    <head>
+		<title>Memory Match</title>
+		<meta charset="utf-8" /><style>
+    .w{"
+        +W
+        +"border:1px solid #777\
+        ;text-align:center\
+        ;margin:5px\
+        ;float:left"
+        +"\
+    }\
+    /* "hide" the back of visible (flipped) and paired cards*/\
+    .v .b,.p .b{transform:scale(0)}
+    /* card */
+    .c{
+        width:99px;height:99px;
+        position:absolute;
+        font-size:80px;
+    }
+    b{
+        A{
+        font-size:24px
+        ;left:5px
+    }
+    .b,.r{
+        color:red\
+    }
+    .b
+      {  background:#ddf}
+        P{transition:1s}
+        
+
+</style>
+
+	</head>
+	<body background="{{ url_for('static', filename='back.jpg') }}">
+	<div style="width: 100%;">
+   <div style="float:left; width: 80%">	
+		<canvas id="c"></canvas>
+		<script>
+			var b = document.body;
+			var c = document.getElementsByTagName('canvas')[0];
+			var a = c.getContext('2d');
+			document.body.clientWidth; // fix bug in webkit: http://qfox.nl/weblog/218
+			   var a1 = document.createElement('audio');
+			   a1.setAttribute('src', '/static/flipped.wav');
+				
+				var a2 = document.createElement('audio');
+			   a2.setAttribute('src', '/static/matched.wav');
+
+			   var a3 = document.createElement('audio');
+			   a3.setAttribute('src', '/static/completed.wav');
+
+		</script>
+		<script>
+		
+		
+// start of submission //
+				var counter = 0;
+				if (!localStorage.getItem("nameless"))	
+					alert("No saved data was detected.....");
+				else
+					alert("Name: " + localStorage.getItem("nameless") + "  Number of turns passed: " + localStorage.getItem("countervalue"));
+				A="position:absolute;";
+				W="width:99px;height:99px;";
+				
+				function saveit()
+				{
+				var name;
+				name = prompt("What is your name: ");
+				localStorage.setItem("nameless",name);
+				 localStorage.setItem("countervalue",counter);
+				 
+				}
+
+				function C(e,c)
+					{
+						e.className="w "+c
+					}
+				
+				function P(s)
+				{
+				return";-webkit-"+s+";-moz-"+s+";-o-"+s
+				}
+				
+				function R(a)
+				{
+					return a.splice(0|a.length*Math.random(),1)[0]
+				}
+				document.querySelector("head").innerHTML="<style>.w{"+W+"border:2px dotted #777;text-align:center;margin:5px;float:left"+"}.v .b,.p .b{"+P("transform:scale(0)")+"}.c{"+W+A+"font-size:80px}b{"+A+"font-size:24px;left:5px}.b,.r{color:green}.b{background:#ddf"+P("transition:1s")+"}</style>";
+				
+				function F(t)
+				{
+				
+				if (counter === 48)
+				{
+				alert("24 turns have passed, you have reached the max amount of turns");
+				location.reload();
+				
+				}
+			else
+				counter=counter+1;
+				a1.currentTime=0;
+				a1.play();
+				
+				v=b.querySelectorAll(".v");
+				x=v[0];
+				y=v[1];
+				if(y)
+				C(x,""),C(y,"");
+				if(x&&!y&&x!=t&&x.innerHTML==t.innerHTML){
+				C(x,"p"),C(t,"p"),l--;
+				    a2.currentTime=0;
+					a2.play();
+				
+				}
+				else 
+				C(t,"v");
+				if(!l){
+				alert("You've Won!!!");
+				a3.currentTime=0;
+				a3.play();
+				}
+				}
+				
+				l=8;
+				q="0A23456789JQK♥♠♦♣".split("");
+				q[0]=10;
+				p=[];
+				for(c=13;c<17;c++)
+				for(i=0;i<13;i++)
+				p.push([c%2?' r':'',c,q[i]]);
+				d=[];
+				for(i=0;i<8;i++)
+				d[i]=d[i+8]=R(p);
+				h='<div style="width:550px">';
+				for(i=16;i;i--)
+		c=R(d),h+='<div class="w" onclick="F(this)"><div class="c f'+c[0]+'"><b>'+q[c[1]]+'</b>'+c[2]+'</div><div class="c b">❁</div></div>';
+				b.innerHTML=h+'</div>'
+// end of submission //
+		</script></div>
+   <div style="float:right;">
+   </div>
+</div>
+<div style="clear:both"></div>
+<button onclick="saveit()" >Save</button>
+	</body>
+</html>
