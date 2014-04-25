@@ -1,0 +1,204 @@
+
+
+<html>
+
+    <head>
+		<title>Memory Match</title>
+		<meta charset="utf-8" /><style>
+    .w{"
+        +W
+        +"border:1px solid #777\
+        ;text-align:center\
+        ;margin:5px\
+        ;float:left"
+        +"\
+    }\
+    /* "hide" the back of visible (flipped) and paired cards*/\
+    .v .b,.p .b{transform:scale(0)}
+    /* card */
+    .c{
+        width:99px;height:99px;
+        position:absolute;
+        font-size:80px;
+    }
+    b{
+        A{
+        font-size:24px
+        ;left:5px
+    }
+    .b,.r{
+        color:red\
+    }
+    .b
+      {  background:#ddf}
+        P{transition:1s}
+        
+
+</style>
+
+	</head>
+	<body background="{{ url_for('static', filename='back.jpg') }}">
+	<div style="width: 100%;">
+   <div style="float:left; width: 80%">	
+		<canvas id="c"></canvas>
+		<script>
+			var b = document.body;
+			var currenplay=document.getElementsByTagName('p')[0];
+			var c = document.getElementsByTagName('canvas')[0];
+			var a = c.getContext('2d');
+			document.body.clientWidth; // fix bug in webkit: http://qfox.nl/weblog/218
+			   var a1 = document.createElement('audio');
+			   a1.setAttribute('src', '/static/flipped.wav');
+				
+				var a2 = document.createElement('audio');
+			   a2.setAttribute('src', '/static/matched.wav');
+
+			   var a3 = document.createElement('audio');
+			   a3.setAttribute('src', '/static/completed.wav');
+			   var play1=0;
+			   var play2=0;
+			   var tal=1;
+
+		</script>
+		<script>
+		
+		
+// start of submission //
+				var counter = 0;
+				if (!localStorage.getItem("player1"))  
+                    alert("No saved data was detected.....");
+                else
+                    alert("Player1: " + localStorage.getItem("player1") + "  Player2: " + localStorage.getItem("player2"));
+        	A="position:absolute;";
+				W="width:99px;height:99px;";
+				
+			function saveit()
+			{
+				var player1;
+       			var player1;
+       			var player2;
+       			player1 = prompt("Enter Player 1 name: ");
+       			player2 = prompt("Enter Player 2 name: ");
+       			localStorage.setItem("player1",player1);
+       			localStorage.setItem("player2",player2);		
+       		}
+
+				function C(e,c)
+					{
+						e.className="w "+c
+					}
+				
+				function P(s)
+				{
+				return";-webkit-"+s+";-moz-"+s+";-o-"+s
+				}
+				
+				function R(a)
+				{
+					return a.splice(0|a.length*Math.random(),1)[0]
+				}
+				document.querySelector("head").innerHTML="<style>.w{"+W+"border:2px dotted #777;text-align:center;margin:5px;float:left"+"}.v .b,.p .b{"+P("transform:scale(0)")+"}.c{"+W+A+"font-size:80px}b{"+A+"font-size:24px;left:5px}.b,.r{color:green}.b{background:#ddf"+P("transition:1s")+"}</style>";
+				
+				function F(t)
+				{
+				
+				if (counter === (2*48))
+				{
+				alert("48 turns have passed, you have reached the max amount of turns");
+				location.reload();
+				
+				}
+			else
+				counter=counter+1;
+				
+				a1.currentTime=0;
+				a1.play();
+				document.getElementById("playertag1").innerHTML="1";
+				document.getElementById("playertag2").innerHTML="2";
+				document.getElementById("playername1").innerHTML=localStorage.getItem("player1");
+				document.getElementById("playername2").innerHTML=localStorage.getItem("player2");
+				document.getElementById("playerscore1").innerHTML=play1;
+				document.getElementById("playerscore2").innerHTML=play2;
+
+				if ((tal%3)==0)
+					document.getElementById("p111").innerHTML="Current Turn: Player 1";
+				else
+					document.getElementById("p111").innerHTML="Current Turn: Player 2";
+				
+				v=b.querySelectorAll(".v");
+				x=v[0];
+				y=v[1];
+				
+				if(y)
+				C(x,""),C(y,"");
+				
+				if(x&&!y&&x!=t&&x.innerHTML==t.innerHTML){
+				C(x,"p"),C(t,"p"),l--;
+				    a2.currentTime=0;
+					a2.play();
+					if ((tal%3)==0)	
+						play1++;
+					else
+						play2++;
+				}
+				
+				else
+				{ 
+				C(t,"v");
+				}
+				tal+=1;
+				if(!l){
+				
+				if(play1<play2)
+					alert("Player 2 wins");
+				else
+					alert("Player 1 wins");
+				a3.currentTime=0;
+				a3.play();
+				}
+				}
+				
+				l=8;
+				q="0A23456789JQK♥♠♦♣".split("");
+				q[0]=10;
+				p=[];
+				for(c=13;c<17;c++)
+				for(i=0;i<13;i++)
+				p.push([c%2?' r':'',c,q[i]]);
+				d=[];
+				for(i=0;i<8;i++)
+				d[i]=d[i+8]=R(p);
+				h='<div style="width:550px">';
+				for(i=16;i;i--)
+		c=R(d),h+='<div class="w" onclick="F(this)"><div class="c f'+c[0]+'"><b>'+q[c[1]]+'</b>'+c[2]+'</div><div class="c b">❁</div></div>';
+				b.innerHTML=h+'</div>'
+// end of submission //
+		</script></div>
+   <div style="float:right;">
+   </div>
+</div>
+<div style="clear:both"></div>
+<button onclick="saveit()" >Save</button>
+	<p id="p111">Current Turn: </p>
+	
+	<table style="width:300px">
+<tr>
+  <td>Player</td>
+  <td>Name</td>		
+  <td>Score</td>
+  </tr>
+<tr>
+  <td id="playertag1"></td>
+  <td id="playername1"></td>		
+  <td id="playerscore1"></td>
+</tr>
+<tr>
+<td id="playertag2"></td>
+  <td id="playername2"></td>		
+  <td id="playerscore2"></td>
+</tr>
+</table>
+
+
+	</body>
+</html>

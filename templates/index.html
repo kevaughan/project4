@@ -1,0 +1,20 @@
+<html>
+<head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="{{ url_for('static',filename='style1.css') }}" rel="stylesheet" />
+
+  </head>
+<body background="{{ url_for('static',filename='pic1.jpg') }}">
+    <div class="container">
+    
+  <h1>Welcome to Network Play </h1>
+        
+    
+   <p>Enter your name: </p>
+    <input type="text" id="name"/>  
+        <a id="newchat" class="btn btn-primary" href="{{ values.roomid }}">Start a new Game</a>
+
+  </div>
+</body>
+<script src="{{ url_for('static',filename='front.js') }}"></script>
+</html>
